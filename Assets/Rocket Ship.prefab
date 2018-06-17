@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 4639061893988866}
   - component: {fileID: 33173523456685424}
   - component: {fileID: 23558407128723918}
-  - component: {fileID: 64836998537414030}
   m_Layer: 0
   m_Name: Quad (4)
   m_TagString: Untagged
@@ -57,7 +56,6 @@ GameObject:
   - component: {fileID: 4717375081538108}
   - component: {fileID: 33899304463837330}
   - component: {fileID: 23324098380655464}
-  - component: {fileID: 64744918053059154}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -75,7 +73,6 @@ GameObject:
   - component: {fileID: 4236552116875078}
   - component: {fileID: 33650154290252712}
   - component: {fileID: 23135229947510202}
-  - component: {fileID: 64605024243204648}
   m_Layer: 0
   m_Name: Quad (3)
   m_TagString: Untagged
@@ -93,7 +90,6 @@ GameObject:
   - component: {fileID: 4407393132276182}
   - component: {fileID: 33217680619715936}
   - component: {fileID: 23628447660711820}
-  - component: {fileID: 65327203082896088}
   m_Layer: 0
   m_Name: right booster (2)
   m_TagString: Untagged
@@ -111,7 +107,6 @@ GameObject:
   - component: {fileID: 4184091600255772}
   - component: {fileID: 33909229230577766}
   - component: {fileID: 23196588276004150}
-  - component: {fileID: 64762270026806152}
   m_Layer: 0
   m_Name: Quad (2)
   m_TagString: Untagged
@@ -129,7 +124,6 @@ GameObject:
   - component: {fileID: 4787223921698242}
   - component: {fileID: 33999751194575434}
   - component: {fileID: 23737939566971442}
-  - component: {fileID: 65324600168686118}
   m_Layer: 0
   m_Name: right booster
   m_TagString: Untagged
@@ -147,7 +141,6 @@ GameObject:
   - component: {fileID: 4995139732661486}
   - component: {fileID: 33083893815205432}
   - component: {fileID: 23179662456602914}
-  - component: {fileID: 64873569853612310}
   m_Layer: 0
   m_Name: Quad (1)
   m_TagString: Untagged
@@ -201,7 +194,6 @@ GameObject:
   - component: {fileID: 4566238758324966}
   - component: {fileID: 33566245897646688}
   - component: {fileID: 23293911096582082}
-  - component: {fileID: 65383880772165100}
   m_Layer: 0
   m_Name: right booster (3)
   m_TagString: Untagged
@@ -235,7 +227,6 @@ GameObject:
   - component: {fileID: 4972592415741286}
   - component: {fileID: 33148539354673624}
   - component: {fileID: 23463347042613378}
-  - component: {fileID: 65705491144800076}
   m_Layer: 0
   m_Name: right booster (1)
   m_TagString: Untagged
@@ -975,112 +966,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!64 &64605024243204648
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115000942260592}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64744918053059154
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057848349834602}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64762270026806152
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1410418447886172}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64836998537414030
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1045513615816680}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64873569853612310
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1433694260933050}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65324600168686118
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1425037857788692}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65327203082896088
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285122249039010}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65383880772165100
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1624264668733632}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65504705134894624
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1111,18 +996,6 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1044847093734062}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65705491144800076
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1651970383677036}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

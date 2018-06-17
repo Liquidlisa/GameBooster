@@ -16,7 +16,6 @@ public class Rocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         Thrust();
         Rotate();
 	}
