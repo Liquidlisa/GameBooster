@@ -4,24 +4,56 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour {
-    float turnrate = 70;
+    [SerializeField] float turnrate = 250f;
+    [SerializeField] float thrustrate = 1000f;
     Rigidbody rigidBody;
+    AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
         rigidBody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        ProcessInput();
+
+        Thrust();
+        Rotate();
 	}
 
-    void ProcessInput()
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                break;
+            default:
+                print("not friendly");
+                break;
+        }
+
+    }
+    void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up);
+            float thrustnow = thrustrate * Time.deltaTime;
+                rigidBody.AddRelativeForce(Vector3.up * thrustnow);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            audioSource.Stop();
+        }
+    }
+    void Rotate()
+    {
+
+        rigidBody.freezeRotation = true; // only turns with key press, not from collision.
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(turnrate * Vector3.forward * Time.deltaTime);
@@ -30,5 +62,6 @@ public class Rocket : MonoBehaviour {
         {
             transform.Rotate(turnrate  * - Vector3.forward * Time.deltaTime);
         }
+        rigidBody.freezeRotation = false;
     }
 }
