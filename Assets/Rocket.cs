@@ -33,7 +33,7 @@ public class Rocket : MonoBehaviour {
         if (0 >= energy) // out of energy
         {
             state = State.Death;
-            Invoke("LoadStartScene", 1f);
+            Invoke("LoadSameScene", 1f);
         }
 
         if (state == State.Alive)
@@ -67,13 +67,16 @@ public class Rocket : MonoBehaviour {
 
     void LoadSameScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         state = State.Alive;
     }
 
     void LoadNextScene()
     {
-        SceneManager.LoadScene(1);
+
+        int index = SceneManager.GetActiveScene().buildIndex + 1;
+        if (index >= 3) index = 3;
+        SceneManager.LoadScene(index);
         state = State.Alive;
     }
 
