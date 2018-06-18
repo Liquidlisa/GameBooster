@@ -27,20 +27,20 @@ public class Rocket : MonoBehaviour {
         if (Time.time - timeTracker >= 1) // update every second
         {
             energy = energy - 1;
-            if(0 >= energy)
-            {
-                state = State.Death;
-                Invoke("LoadStartScene", 1f);
-
-            }
             timeTracker = Time.time; // reset to current time
-            textMesh[0].text = energy+""; // number posted as text
-
         }
+
+        if (0 >= energy) // out of energy
+        {
+            state = State.Death;
+            Invoke("LoadStartScene", 1f);
+        }
+
         if (state == State.Alive)
         {
-        Thrust();
-        Rotate();
+            Thrust();
+            Rotate();
+            textMesh[0].text = energy + ""; // number posted as text
         }
         else
         {
