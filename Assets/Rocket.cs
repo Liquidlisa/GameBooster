@@ -6,18 +6,25 @@ public class Rocket : MonoBehaviour {
     [SerializeField] float thrustrate = 1000f;
     Rigidbody rigidBody;
     AudioSource audioSource;
-
+    TextMesh textMesh;
+    int currentScene = 0;
+    float energy = 999f;
     enum State {Alive, Death, Transcending };
     State state = State.Alive;
+    float startTime;
 	// Use this for initialization
 	void Start () {
+        textMesh = GetComponent<TextMesh>();
+        textMesh.text = "9";
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-	}
+        startTime = Time.time;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        print(Time.time - startTime);
         if (state == State.Alive)
         {
         Thrust();
@@ -31,10 +38,7 @@ public class Rocket : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(state != State.Alive)
-        {
-            return;
-        }
+        if(state != State.Alive) { return; }
         switch (collision.gameObject.tag)
         {
             case "Friendly":
@@ -45,20 +49,36 @@ public class Rocket : MonoBehaviour {
                 break;
             default:
                 state = State.Death;
-                Invoke("LoadStartScene", 1f);
+                Invoke("LoadSameScene", 1f);
                 break;
         }
+    }
 
+    void LoadSameScene()
+    {
+        SceneManager.LoadScene(currentScene);
+        state = State.Alive;
     }
 
     void LoadNextScene()
     {
-        SceneManager.LoadScene(1);
+        currentScene = currentScene + 1;
+        if (currentScene >= SceneManager.sceneCount) currentScene = SceneManager.sceneCount;
+        if (currentScene == SceneManager.sceneCount)
+        {
+            SceneManager.LoadScene(SceneManager.sceneCount);
+        }
+        else
+        {
+        SceneManager.LoadScene(currentScene);
+        }
         state = State.Alive;
+
     }
 
     void LoadStartScene()
     {
+        currentScene = 0;
         SceneManager.LoadScene(0);
         state = State.Alive;
     }
