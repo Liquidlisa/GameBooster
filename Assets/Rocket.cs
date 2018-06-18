@@ -6,25 +6,37 @@ public class Rocket : MonoBehaviour {
     [SerializeField] float thrustrate = 1000f;
     Rigidbody rigidBody;
     AudioSource audioSource;
-    TextMesh textMesh;
-    int currentScene = 0;
-    float energy = 999f;
+    TextMesh[] textMesh;
+    float energy = 50f;
     enum State {Alive, Death, Transcending };
     State state = State.Alive;
-    float startTime;
-	// Use this for initialization
+    float timeTracker;
+
 	void Start () {
-        textMesh = GetComponent<TextMesh>();
-        textMesh.text = "9";
+
+        textMesh = GetComponentsInChildren<TextMesh>();
+        textMesh[0].text = energy+"";
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        startTime = Time.time;
+        timeTracker = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(Time.time - startTime);
+        if (Time.time - timeTracker >= 1) // update every second
+        {
+            energy = energy - 1;
+            if(0 >= energy)
+            {
+                state = State.Death;
+                Invoke("LoadStartScene", 1f);
+
+            }
+            timeTracker = Time.time; // reset to current time
+            textMesh[0].text = energy+""; // number posted as text
+
+        }
         if (state == State.Alive)
         {
         Thrust();
@@ -48,44 +60,32 @@ public class Rocket : MonoBehaviour {
                 Invoke("LoadNextScene", 1f);
                 break;
             default:
-                state = State.Death;
-                Invoke("LoadSameScene", 1f);
+                energy = energy - 5;
                 break;
         }
     }
 
     void LoadSameScene()
     {
-        SceneManager.LoadScene(currentScene);
+        SceneManager.LoadScene(0);
         state = State.Alive;
     }
 
     void LoadNextScene()
     {
-        currentScene = currentScene + 1;
-        if (currentScene >= SceneManager.sceneCount) currentScene = SceneManager.sceneCount;
-        if (currentScene == SceneManager.sceneCount)
-        {
-            SceneManager.LoadScene(SceneManager.sceneCount);
-        }
-        else
-        {
-        SceneManager.LoadScene(currentScene);
-        }
+        SceneManager.LoadScene(1);
         state = State.Alive;
-
     }
 
     void LoadStartScene()
     {
-        currentScene = 0;
         SceneManager.LoadScene(0);
         state = State.Alive;
     }
 
     void Thrust()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.W))
         {
             float thrustnow = thrustrate * Time.deltaTime;
             rigidBody.AddRelativeForce(Vector3.up * thrustnow);
@@ -95,7 +95,17 @@ public class Rocket : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKey(KeyCode.S))
+        {
+            float thrustnow = thrustrate * Time.deltaTime;
+            rigidBody.AddRelativeForce(Vector3.down * thrustnow);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
         {
             audioSource.Stop();
         }
