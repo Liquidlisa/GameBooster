@@ -55,6 +55,10 @@ public class Rocket : MonoBehaviour {
         {
             case "Friendly":
                 break;
+            case "Fuel":
+                energy = energy + 20;
+                collision.gameObject.SetActive(false);
+                break;
             case "Finish":
                 state = State.Transcending;
                 Invoke("LoadNextScene", 1f);
@@ -75,7 +79,7 @@ public class Rocket : MonoBehaviour {
     {
 
         int index = SceneManager.GetActiveScene().buildIndex + 1;
-        if (index >= 3) index = 3;
+        //if (index >= 3) index = 3;
         SceneManager.LoadScene(index);
         state = State.Alive;
     }
