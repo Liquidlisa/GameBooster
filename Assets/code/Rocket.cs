@@ -5,6 +5,7 @@ public class Rocket : MonoBehaviour {
     [SerializeField] float turnrate = 250f;
     [SerializeField] float thrustrate = 1000f;
     [SerializeField] float levelDelay = 2f;
+
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip death;
     [SerializeField] AudioClip jingle;
@@ -41,11 +42,15 @@ public class Rocket : MonoBehaviour {
 
         if (0 >= energy) // out of energy
         {
-            state = State.Death;
-            audioSource.Stop();
-            audioSource.PlayOneShot(death);
-            deathParticles.Play();
-            Invoke("LoadSameScene", levelDelay);
+            if (state != State.Death)
+            {
+                state = State.Death;
+                audioSource.Stop();
+                audioSource.PlayOneShot(death);
+                mainEngineParticles.Stop();
+                deathParticles.Play();
+                Invoke("LoadSameScene", levelDelay);
+            }
         }
 
         if (state == State.Alive)
@@ -53,10 +58,6 @@ public class Rocket : MonoBehaviour {
             Thrust();
             Rotate();
             textMesh[0].text = energy + ""; // number posted as text
-        }
-        else
-        {
-            audioSource.Stop();
         }
 	}
 
@@ -68,15 +69,17 @@ public class Rocket : MonoBehaviour {
             case "Friendly":
                 break;
             case "Fuel":
+                audioSource.Stop();
                 audioSource.PlayOneShot(jingle);
                 energy = energy + 20;
                 collision.gameObject.SetActive(false);
                 break;
             case "Finish":
-                state = State.Transcending;
                 audioSource.Stop();
                 audioSource.PlayOneShot(jingle);
                 jingleParticles.Play();
+                mainEngineParticles.Stop();
+                state = State.Transcending;
                 Invoke("LoadNextScene", levelDelay);
                 break;
             default:
