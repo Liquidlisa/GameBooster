@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 229031636}
   - component: {fileID: 229031635}
   - component: {fileID: 229031634}
+  - component: {fileID: 229031638}
   m_Layer: 0
   m_Name: platform
   m_TagString: Untagged
@@ -306,6 +307,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &229031638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229031633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f45712284c255458862d13156168bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 10, y: 10, z: 10}
+  period: 2
 --- !u!1001 &710476334
 Prefab:
   m_ObjectHideFlags: 0

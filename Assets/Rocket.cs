@@ -4,6 +4,15 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour {
     [SerializeField] float turnrate = 250f;
     [SerializeField] float thrustrate = 1000f;
+    [SerializeField] float levelDelay = 2f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip death;
+    [SerializeField] AudioClip jingle;
+
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] ParticleSystem jingleParticles;
+
     Rigidbody rigidBody;
     AudioSource audioSource;
     TextMesh[] textMesh;
@@ -12,8 +21,8 @@ public class Rocket : MonoBehaviour {
     State state = State.Alive;
     float timeTracker;
 
-	void Start () {
-
+	void Start ()
+    {
         textMesh = GetComponentsInChildren<TextMesh>();
         textMesh[0].text = energy+"";
         rigidBody = GetComponent<Rigidbody>();
@@ -33,7 +42,10 @@ public class Rocket : MonoBehaviour {
         if (0 >= energy) // out of energy
         {
             state = State.Death;
-            Invoke("LoadSameScene", 1f);
+            audioSource.Stop();
+            audioSource.PlayOneShot(death);
+            deathParticles.Play();
+            Invoke("LoadSameScene", levelDelay);
         }
 
         if (state == State.Alive)
@@ -56,12 +68,16 @@ public class Rocket : MonoBehaviour {
             case "Friendly":
                 break;
             case "Fuel":
+                audioSource.PlayOneShot(jingle);
                 energy = energy + 20;
                 collision.gameObject.SetActive(false);
                 break;
             case "Finish":
                 state = State.Transcending;
-                Invoke("LoadNextScene", 1f);
+                audioSource.Stop();
+                audioSource.PlayOneShot(jingle);
+                jingleParticles.Play();
+                Invoke("LoadNextScene", levelDelay);
                 break;
             default:
                 energy = energy - 5;
@@ -77,9 +93,7 @@ public class Rocket : MonoBehaviour {
 
     void LoadNextScene()
     {
-
         int index = SceneManager.GetActiveScene().buildIndex + 1;
-        //if (index >= 3) index = 3;
         SceneManager.LoadScene(index);
         state = State.Alive;
     }
@@ -98,7 +112,8 @@ public class Rocket : MonoBehaviour {
             rigidBody.AddRelativeForce(Vector3.up * thrustnow);
             if (!audioSource.isPlaying)
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
+                mainEngineParticles.Play();
             }
         }
 
@@ -108,14 +123,16 @@ public class Rocket : MonoBehaviour {
             rigidBody.AddRelativeForce(Vector3.down * thrustnow);
             if (!audioSource.isPlaying)
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
         }
 
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
         {
             audioSource.Stop();
+            mainEngineParticles.Stop();
         }
+        
     }
 
     void Rotate()
